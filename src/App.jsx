@@ -8,7 +8,7 @@ import Footer from './assets/Footer/Footer'
 export default function App() {
   return (
     <>
-    <Navbar />
+    <Navbar precio=" 25000" />
     <Home /> 
     <Footer />
     </>
