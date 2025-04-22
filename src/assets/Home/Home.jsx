@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <>
     <Header />
-    <Register />
-    {/* <Login /> */}
+    {/* <Register /> */}
+    <Login />
     {/* <div id="menu-cards">
     <CardPizza 
     nombre= "Napolitana"

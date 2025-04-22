@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Register.css'
 
 export default function Register() {
     const [email,setEmail] = useState('');
@@ -27,8 +28,11 @@ export default function Register() {
         }
   return (
     <>
-    <form onSubmit={validacion}>
-        <div>
+    <div id="conteiner">
+        
+    <form id="formulario" onSubmit={validacion}>
+        <h2>Crear nuevo perfil</h2>
+        <div className='campos'>
             <label>Email</label>
             <input
             type='text'
@@ -37,7 +41,7 @@ export default function Register() {
             value={email}
             />
         </div>
-        <div>
+        <div className='campos'>
             <label>Contraseña</label>
             <input
             type='password'
@@ -46,7 +50,7 @@ export default function Register() {
             value={password}
             />
         </div>
-        <div>
+        <div className='campos'>
             <label>Confirmar Contraseña</label>
             <input
             type='password'
@@ -56,9 +60,10 @@ export default function Register() {
             />
         </div>
         {error !== null && 
-        (error ? <p>Complete todos los campos</p> : <p>Datos ingresados de manera exitosa</p>)}
+        (error ? <p id="incorrecto">Complete todos los campos</p> : <p id="correcto">Datos ingresados de manera exitosa</p>)}
         <button type='submit'>Enviar</button>
     </form>
+    </div>
     </>
   )
 }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import './login.css'
 
 export default function Login() {
        const [email,setEmail] = useState('');
        const [password,setPassword] = useState('');
-       const [error,setError] = useState(false); 
+       const [error,setError] = useState(null); 
        
        const validacion = (e) => {
               e.preventDefault ()
@@ -19,8 +20,10 @@ export default function Login() {
        }
 
        return <>
-              <form onSubmit={validacion}>
-              <div>
+       <div id="conteiner">
+       <form id="formulario" onSubmit={validacion}>
+              <h2>Login</h2>
+              <div className='campos'>
               <label>Email</label>
               <input
               type='text'
@@ -29,7 +32,7 @@ export default function Login() {
               value={email}
               />
               </div>
-              <div>
+              <div className='campos'>
               <label>Contraseña</label>
               <input
               type='password'
@@ -38,8 +41,9 @@ export default function Login() {
               value={password}
               />
               </div>
-              {error ? <p>Complete todos los campos</p> : <p>Datos ingresados de manera exitosa</p>}
+              {error !== null && (error ? <p id="incorrecto">Complete todos los campos</p> : <p id="correcto">Datos ingresados de manera exitosa</p>)}
               <button type='submit'>Enviar</button>
               </form>
+       </div>
               </>
 }
