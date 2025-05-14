@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pizzas } from '../Home/pizzas';
+import './Cart.css';
 
 
 export default function() {
@@ -22,7 +23,7 @@ export default function() {
     const handleDecrease = (id) => {
         setListaPizza((prevListaPizza) =>
         prevListaPizza.map((detalle) => {
-            if (detalle.id === id && detalle.count > 0) {
+            if (detalle.id === id && detalle.count >= 0) {
                 return {...detalle, count: detalle.count - 1};
             }
             return detalle;
@@ -39,14 +40,17 @@ export default function() {
 
     return (
     <>
-    <div>
+    <div className='Conteiner'>
     <h2>Detalle del pedido:</h2>
-    <div>
-        <ul>
+    {listaPizza.every(pizza => pizza.count === 0) && (
+        <p id='mensajeInicial'>El carrito esta vacío, pero puedes agregar productos:</p>
+    )}
+    <div className='carrito'>
+        <ul className='listaPizzas'>
         {listaPizza.map((detalle) => (
-            <li key={detalle.id}>
-            <div>
-                <img src={detalle.src} alt={detalle.name} />
+            <li className='itemPizza' key={detalle.id}>
+            <div className='productoPizza'>
+                <img src={detalle.img} alt={detalle.name} />
                 <h3>{detalle.name}</h3>
                 <p>${detalle.price}</p>
                 <button onClick={() => handleDecrease(detalle.id)}>-</button>
@@ -58,6 +62,7 @@ export default function() {
     )}
         </ul>
     </div>
+    
     <div>
         <h2>Total:<span>${total.toFixed(0)}</span></h2>
         <button>Pagar</button>
