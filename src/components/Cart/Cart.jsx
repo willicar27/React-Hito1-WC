@@ -63,7 +63,7 @@ export default function() {
         </ul>
     </div>
     
-    <div>
+    <div className='total'>
         <h2>Total:<span>${total.toFixed(0)}</span></h2>
         <button>Pagar</button>
     </div>
