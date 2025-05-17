@@ -5,6 +5,7 @@ import Register from '../../components/Home/Register/Register';
 import Login from '../../components/Home/Login/Login';
 import Footer from '../../components/Footer/Footer';
 import Cart from '../../components/Cart/Cart';
+import Pizza from '../../components/Pizza/Pizza';
 
 
 
@@ -15,7 +16,8 @@ export default function App() {
     {/* <Home />  */}
     {/* <Register /> */}
     {/* <Login /> */}
-    <Cart />
+    {/* <Cart /> */}
+    <Pizza />
     <Footer />
     </>
   )

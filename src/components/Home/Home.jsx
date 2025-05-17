@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react'
 import "./Home.css"
 import  Header  from './Header/Header'
 // import Register from './Register/Register'
@@ -11,8 +11,6 @@ export default function Home() {
   return (
     <>
     <Header />
-    {/* <Register /> */}
-    {/* <Login /> */}
     <div id="menu-cards">
       {Pizzas.map((pizza) => (
         <CardPizza 
