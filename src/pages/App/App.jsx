@@ -13,11 +13,11 @@ export default function App() {
   return (
     <>
     <Navbar precio=" 25000" />
-    {/* <Home />  */}
+    <Home /> 
     {/* <Register /> */}
     {/* <Login /> */}
     {/* <Cart /> */}
-    <Pizza />
+    {/* <Pizza /> */}
     <Footer />
     </>
   )

@@ -1,5 +1,62 @@
 #menu-cards {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
+    margin: 30px;
+}
+#card-product {
+    margin: 10px;
+    width: 260px;
+    border-radius: 5px;
+    border: solid 1px #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    box-shadow: 3px 3px 5px 0px #aaa
+}
+#titulo-card {
+    text-transform: uppercase;
+}
+#img-product {
+    width: 100%;
+    height: 35%;
+    border-radius: 0px;
+
+}
+#card-ingredientes {
+    padding: 20px;
+    width: 100%;
+    height: 32%;
+    border-top: solid 1px #333;
+    border-bottom: solid 1px #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    word-break: break-word;
+}
+#card-button {
+    padding: 20px;
+    width: 100%;
+    border-top: solid 1px #333;
+   display: flex;
+   justify-content: space-around;
+}
+#añadir {
+    background-color: #333;
+    color: #fff;
+}
+button {
+    padding: 5px;
+    border-radius: 5px;
+    border: none
+}
+.ingredientes {
+    list-style: none;
 }
