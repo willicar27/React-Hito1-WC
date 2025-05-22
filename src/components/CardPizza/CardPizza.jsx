@@ -1,6 +1,6 @@
 import React from 'react'
 import './CardPizza.css'
-import { Pizzas } from '../pizzas'
+import { Pizzas } from '../../pages/Home/pizzas'
 
 export default function CardPizza({img, name, ingredients, price}) {
   

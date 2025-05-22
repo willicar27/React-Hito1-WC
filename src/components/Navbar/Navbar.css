@@ -16,18 +16,9 @@
 #home:hover {
     background-color: rgba(255, 255, 255, 0.3);
 }
-#menu {
-    list-style: none;
+#section-perfil {
     display: flex;
-    gap: 10px;
-}
-#menu li {
-    padding: 0px 10px;
-    border-radius: 5px;
-    border:1px solid #aaa9f4;
-}
-#menu li:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    gap: 20px;
 }
 #total {
     padding: 0px 10px;

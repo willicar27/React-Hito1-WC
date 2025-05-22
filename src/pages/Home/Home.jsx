@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import "./Home.css";
-import  Header  from './Header/Header';
+import  Header  from '../../components/Header/Header';
 
 
 export default function Home() {

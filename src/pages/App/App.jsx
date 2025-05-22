@@ -1,11 +1,13 @@
 import React from 'react'
+import {Route, Routes} from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
-import Home from '../../components/Home/Home';
-import Register from '../../components/Home/Register/Register';
-import Login from '../../components/Home/Login/Login';
+import Home from '../Home/Home';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 import Footer from '../../components/Footer/Footer';
-import Cart from '../../components/Cart/Cart';
-import Pizza from '../../components/Pizza/Pizza';
+import Cart from '../Cart/Cart';
+import Pizza from '../Pizza/Pizza';
+import NotFound from '../NotFound/NotFound';
 
 
 
@@ -13,11 +15,14 @@ export default function App() {
   return (
     <>
     <Navbar precio=" 25000" />
-    <Home /> 
-    {/* <Register /> */}
-    {/* <Login /> */}
-    {/* <Cart /> */}
-    {/* <Pizza /> */}
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/register' element={<Register/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/cart' element={<Cart/>} />
+      <Route path='/pizza' element={<Pizza/>} />
+      <Route path='*' element={<NotFound/>} />
+    </Routes>
     <Footer />
     </>
   )
