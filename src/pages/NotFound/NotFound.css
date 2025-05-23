@@ -1,0 +1,18 @@
+#Conteiner-notFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 15x;
+}
+
+#img-notFound {
+width: 15em;
+height: 300px;
+}
+#btn-notFound-home {
+    padding: 10px;
+    background-color: rgb(39, 45, 39);
+    color: white;
+}

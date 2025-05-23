@@ -8,6 +8,7 @@ import Footer from '../../components/Footer/Footer';
 import Cart from '../Cart/Cart';
 import Pizza from '../Pizza/Pizza';
 import NotFound from '../NotFound/NotFound';
+import Porfile from '../Profile/Porfile';
 
 
 
@@ -21,6 +22,7 @@ export default function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/cart' element={<Cart/>} />
       <Route path='/pizza' element={<Pizza/>} />
+      <Route path='/porfile' element={<Porfile/>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
     <Footer />

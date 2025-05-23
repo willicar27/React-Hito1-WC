@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from 'react-router';
 import './Navbar.css'
 
 export default function Navbar() { 
@@ -14,14 +14,27 @@ export default function Navbar() {
   return (
     <div id="navbar">
       <h3>Pizzería Mamma Mía!</h3>
+      <Link to="/">
       <button id="home">🍕Home</button>
+      </Link>
+      
       <section id='section-perfil'>
+        <Link to="/porfile">
         {token && <div>🔒Profile</div>}
+        </Link>
+        <Link to="/logout">
         {token && <div>🔓Logout</div>}
+        </Link>
+        <Link to="/login">
         {!token && <div>🔏login</div>}
-        {!token && <div>🔐Register</div>}
+        </Link>
+        <Link to="/register">
+         {!token && <div>🔐Register</div>}
+         </Link>
       </section>
+      <Link to="/cart">
       <button id="total">🛒 ${formatPrice(total)}</button>
+      </Link>
     </div>
   )
 }
