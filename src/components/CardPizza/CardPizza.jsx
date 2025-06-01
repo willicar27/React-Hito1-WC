@@ -1,9 +1,11 @@
-import React from 'react'
-import './CardPizza.css'
-import { Pizzas } from '../../pages/Home/pizzas'
+import React, { useContext } from 'react';
+import './CardPizza.css';
+import {ContextCart} from '../../Context/ContextCart';
 
-export default function CardPizza({img, name, ingredients, price}) {
+export default function CardPizza({img, name, ingredients, price, id})  {
   
+  const {HandleAgregarCarrito} = useContext(ContextCart);
+
   return (
     <div id="card-product">
         <img id="img-product" src={img} alt={name}/>
@@ -18,7 +20,7 @@ export default function CardPizza({img, name, ingredients, price}) {
         <span>Precio: $ {price}</span>
         <div id="card-button">
           <button>Ver Mas👀</button>
-          <button id="añadir">Añadir🛒</button>
+          <button id="añadir" onClick={() => HandleAgregarCarrito(id)}>Añadir🛒</button>
         </div>
     </div>
   )

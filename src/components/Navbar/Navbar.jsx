@@ -1,40 +1,40 @@
-import { Link } from 'react-router';
-import './Navbar.css'
+import { Link } from 'react-router-dom';
+import './Navbar.css';
+import { useContext } from 'react';
+import { ContextCart } from '../../Context/ContextCart';
+
 
 export default function Navbar() { 
-  let token = true;
-  const total = 25000;
-  //funcion que formatea el total
-  const formatPrice = (amount) => {
-    return amount.toLocaleString("es-ES", {
-      style: "currency",
-      currency: "CLP",
-    })
-  }
+  
+  const {total} = useContext(ContextCart);
+
   return (
-    <div id="navbar">
+    <>
+    <nav id="navbar">
       <h3>Pizzería Mamma Mía!</h3>
       <Link to="/">
       <button id="home">🍕Home</button>
       </Link>
       
       <section id='section-perfil'>
-        <Link to="/porfile">
-        {token && <div>🔒Profile</div>}
+        <Link to="/profile">
+          <div>🔒Profile</div>
         </Link>
         <Link to="/logout">
-        {token && <div>🔓Logout</div>}
+          <div>🔓Logout</div>
         </Link>
         <Link to="/login">
-        {!token && <div>🔏login</div>}
+          <div>🔏login</div>
         </Link>
         <Link to="/register">
-         {!token && <div>🔐Register</div>}
-         </Link>
+          <div>🔐Register</div>
+        </Link>
       </section>
-      <Link to="/cart">
-      <button id="total">🛒 ${formatPrice(total)}</button>
-      </Link>
-    </div>
+        <Link to="/cart">
+          <button id="total">🛒 $ {total} </button>
+        </Link>
+    </nav>
+    </>
+    
   )
 }

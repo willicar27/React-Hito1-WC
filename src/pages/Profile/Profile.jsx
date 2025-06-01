@@ -1,7 +1,7 @@
 import React from 'react'
-import './Porfile.css'
+import './Profile.css'
 
-export default function Porfile() {
+export default function Profile() {
   return (
     <>
     <div id='conteiner-porfile'
