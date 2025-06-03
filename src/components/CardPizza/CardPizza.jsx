@@ -20,7 +20,7 @@ export default function CardPizza({img, name, ingredients, price, id})  {
         <span>Precio: $ {price}</span>
         <div id="card-button">
           <button>Ver Mas👀</button>
-          <button id="añadir" onClick={() => HandleAgregarCarrito(id)}>Añadir🛒</button>
+          <button id="añadir" onClick={() => HandleAgregarCarrito({img, name, price, id})}>Añadir🛒</button>
         </div>
     </div>
   )

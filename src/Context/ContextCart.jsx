@@ -1,41 +1,47 @@
 import { createContext, useState } from "react";
 import { pizzaCart } from "../assets/JS/pizzas";
+
 export const ContextCart = createContext();
 
-export const CartProvider = ({Children}) => {
-const [cart, setCart] = useState(pizzaCart);
+export const CartProvider = ({children}) => {
+const [cart, setCart] = useState(
+    pizzaCart.map((pizza) => ({ ...pizza, count: 0}))
+);
 
 const nuevaPizzaCount = (id, increment = true) => {
     setCart((prevCart) =>
         prevCart.map((pizza) => 
             pizza.id === id
-                ? {...pizza, count: increment ? pizza.count + 1 : pizza.count -1}
+                ? {...pizza, count: Number(pizza.count || 0) + (increment ? 1 : -1),    
+                }
                 : pizza)
-                ).filter((pizza) => pizza.count > 0)
-}
+                ).filter((pizza) => (pizza.count || 0) > 0);
+};
 
 const handleIncrease = (id) => nuevaPizzaCount(id, true);
 
 const handleDecrease = (id) => nuevaPizzaCount(id, false);
 
-const HandleAgregarCarrito = (id) => {
+const HandleAgregarCarrito = (pizza) => {
     setCart((prevCart) => {
-        const pizzaDentroCarrito = prevCart.find((pizza) => pizza.id === id);
+        const pizzaDentroCarrito = prevCart.find((p) => p.id === pizza.id);
 
         if (pizzaDentroCarrito) {
-            return prevCart.map((pizza) => 
-            pizza.id === id ? {...pizza, count: pizza.count + 1} : pizza
+            return prevCart.map((p) => 
+            p.id === pizza.id 
+            ? {...p, count: Number(p.count || 0) + 1}
+            : p
             );
         } else {
-            const pizzaAgregar = pizzaCart.find((pizza) => pizza.id === id);
-            return [...prevCart, {...pizzaAgregar, count: 1}];
+
+            return [...prevCart, {...pizza, count: 1}];
         }
     });
 };
 
 const total = cart.reduce((acc, pizza) => {
-    const price = isNaN(pizza.price) ? 0 : pizza.price;
-    const count = isNaN(pizza.count) ? 0 : pizza.count;
+    const price = Number(pizza.price) || 0;
+    const count = Number(pizza.count) || 0;
     return acc + price * count;
 }, 0);
 
@@ -46,6 +52,11 @@ const contextValue = {
     HandleAgregarCarrito,
     total,
 };
+console.log(cart);
 
-return <ContextCart.Provider value={contextValue}>{Children}</ContextCart.Provider>
-}
+return (
+    <ContextCart.Provider value={contextValue}>
+    {children}
+    </ContextCart.Provider>
+);
+};

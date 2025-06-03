@@ -3,7 +3,7 @@ import './Cart.css';
 import { ContextCart } from '../../Context/ContextCart';
 
 
-export default function() {
+export default function Cart() {
 
     const {cart, handleIncrease, handleDecrease, total,} = useContext(ContextCart);
     
@@ -16,7 +16,7 @@ export default function() {
     ) : (
     <div className='carrito'>
         <ul className='listaPizzas'>
-        {listaPizza.map((detalle) => (
+        {cart.map((detalle) => (
             <li className='itemPizza' key={detalle.id}>
             <div className='productoPizza'>
                 <img src={detalle.img} alt={detalle.name} />

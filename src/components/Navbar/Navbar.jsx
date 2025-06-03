@@ -10,6 +10,7 @@ export default function Navbar() {
 
   return (
     <>
+    {/* <h1>hola Navbar</h1> */}
     <nav id="navbar">
       <h3>Pizzería Mamma Mía!</h3>
       <Link to="/">
