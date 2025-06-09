@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import './Cart.css';
-import { ContextCart } from '../../Context/ContextCart';
+import { ContextCart, UserContext } from '../../Context/ContextCart';
 
 
 export default function Cart() {
 
     const {cart, handleIncrease, handleDecrease, total,} = useContext(ContextCart);
-    
+    const {token} = UserContext();
+
     return (
     <>
     <div className='Conteiner'>
@@ -35,7 +36,7 @@ export default function Cart() {
     
     <div className='total'>
         <h2>Total:<span>${total.toFixed(0)}</span></h2>
-        <button>Pagar</button>
+        <button disabled={!token}>Pagar</button>
     </div>
     </div>
     </>

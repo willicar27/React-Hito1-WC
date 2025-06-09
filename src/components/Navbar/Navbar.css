@@ -34,3 +34,18 @@
     background-color: #000;
     color: #000
 }
+.boton1 {
+    text-decoration: none;
+    border: solid black 1 px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.active {
+    text-decoration: none;
+    color: aquamarine;
+}
+.inactive {
+    text-decoration: none;
+    color: bisque;
+}
