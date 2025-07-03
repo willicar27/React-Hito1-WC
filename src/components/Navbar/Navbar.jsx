@@ -1,7 +1,8 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { useContext } from 'react';
-import { ContextCart, UserContext } from '../../Context/ContextCart';
+import { ContextCart } from '../../Context/ContextCart';
+import {UserContext } from '../../Context/UserContext';
 import { setActiveClass } from '../../utilities/setActive';
 
 
@@ -34,7 +35,7 @@ export default function Navbar() {
         </>
       ) : (
         <>
-           <NavLink to="/login">
+          <NavLink to="/login">
           <button className={setActiveClass}>🔏login</button>
         </NavLink>
         <NavLink to="/register">

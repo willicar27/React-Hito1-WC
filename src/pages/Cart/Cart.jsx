@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import './Cart.css';
-import { ContextCart, UserContext } from '../../Context/ContextCart';
-
+import { ContextCart } from '../../Context/ContextCart';
+import { UserContext } from '../../Context/UserContext';
 
 export default function Cart() {
 
     const {cart, handleIncrease, handleDecrease, total,} = useContext(ContextCart);
-    const {token} = UserContext();
+    const {token} = useContext(UserContext);
 
     return (
     <>

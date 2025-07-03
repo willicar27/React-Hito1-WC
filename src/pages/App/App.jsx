@@ -10,25 +10,27 @@ import Pizza from '../Pizza/Pizza';
 import NotFound from '../NotFound/NotFound';
 import Profile from '../Profile/Profile';
 import { CartProvider } from '../../Context/ContextCart'; 
-
+import { UserProvider } from '../../Context/UserContext';
 
 
 export default function App() {
   return (
     <>
+  <UserProvider>
     <CartProvider>
-     <Navbar />
-    <Routes>
-      <Route path='/' element={<Home/>} />
-      <Route path='/register' element={<Register/>} />
-      <Route path='/login' element={<Login/>} />
-      <Route path='/cart' element={<Cart/>} />
-      <Route path='/pizza' element={<Pizza/>} />
-      <Route path='/profile' element={<Profile/>} />
-      <Route path='*' element={<NotFound/>} />
-    </Routes>
-    <Footer />
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/cart' element={<Cart/>} />
+        <Route path='/pizza' element={<Pizza/>} />
+        <Route path='/profile' element={<Profile/>} />
+        <Route path='*' element={<NotFound/>} />
+      </Routes>
+      <Footer />
     </CartProvider>
+  </UserProvider>
     </>
   )
 }
