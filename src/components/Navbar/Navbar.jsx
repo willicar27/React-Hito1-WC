@@ -4,13 +4,15 @@ import { useContext } from 'react';
 import { ContextCart } from '../../Context/ContextCart';
 import {UserContext } from '../../Context/UserContext';
 import { setActiveClass } from '../../utilities/setActive';
+import { useUser } from '../../Context/UserContext';
 
 
 export default function Navbar() { 
   
   const {total} = useContext(ContextCart);
-  const {token, logout} = useContext(UserContext);
+  const {token, logout} = useUser();
   const navigate = useNavigate();
+  const setActiveClass = ({isActive}) => (isActive ? "active" : "NoActive");
 
   const handleLogout = () => {
     logout();
@@ -22,7 +24,7 @@ export default function Navbar() {
     {/* <h1>hola Navbar</h1> */}
     <nav id="navbar">
       <h3>Pizzería Mamma Mía!</h3>
-      <NavLink to="/">
+      <NavLink to="/" className={setActiveClass}>
       <button id="home">🍕Home</button>
       </NavLink>
       {token ? (
@@ -30,8 +32,7 @@ export default function Navbar() {
           <NavLink to="/profile">
           <button className={setActiveClass}>🔒Profile</button>
         </NavLink>
-        <button onClick={handleLogout} className="boton1">🔓Logout</button>
-      
+        <button onClick={handleLogout} className={setActiveClass}>🔓Logout</button>
         </>
       ) : (
         <>
@@ -44,7 +45,7 @@ export default function Navbar() {
         </>
       )}
         <Link to="/cart">
-          <button id="total">🛒 $ {total} </button>
+          <button className={setActiveClass}>🛒 $ {total} </button>
         </Link>
     </nav>
     </>

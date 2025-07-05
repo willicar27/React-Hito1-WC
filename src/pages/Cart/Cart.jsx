@@ -1,12 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './Cart.css';
 import { ContextCart } from '../../Context/ContextCart';
-import { UserContext } from '../../Context/UserContext';
+import { useUser } from "../../Context/UserContext"
+import { Link } from "react-router-dom";
 
 export default function Cart() {
 
-    const {cart, handleIncrease, handleDecrease, total,} = useContext(ContextCart);
-    const {token} = useContext(UserContext);
+    const {cart, handleIncrease, handleDecrease, total,  HandleAgregarCarrito} = useContext(ContextCart);
+    const {token} = useUser();
+
+    const handlePayment = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/checkouts', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ cartItems: cart, total})
+            })
+
+            if (!response.ok) {
+                const errorText = await response.text()
+                throw new Error(errorText || 'Error al procesar el pago')
+            }
+            clearCart()
+            alert('Pago Exitoso. Gracias por tu compra!')
+        }
+        catch (error) {
+            console.error('Error en el checkout:', error.message)
+            alert('Error en el checkut: ' + error.message)
+        }
+    }
 
     return (
     <>
@@ -36,7 +61,8 @@ export default function Cart() {
     
     <div className='total'>
         <h2>Total:<span>${total.toFixed(0)}</span></h2>
-        <button disabled={!token}>Pagar</button>
+        <button disabled={!token || cart.length === 0} onClick={handlePayment}>Pagar</button>
+        <link to="/">seguir comprando</link>
     </div>
     </div>
     </>

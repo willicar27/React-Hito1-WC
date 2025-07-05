@@ -1,27 +1,51 @@
-import React, { useState } from 'react'
-import './Register.css'
+import React, { useState } from 'react';
+import { useUser} from "../../Context/UserContext";
+import { useNavigate} from "../../Context/UserContext";
+import './Register.css';
 
 export default function Register() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [confirmar,setConfirmar] = useState('');
-    const [error,setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const {token, register} = useUser();
+    const navigate = useNavigate();
+
+    if (token) {
+        navigate("/")
+    }
 
     //funcion de validacion 
 
-    const validacion = (e) => {
-        e.preventDefault()
+    const validacion = async (e) => {
+        e.preventDefault();
 
-        if(
-           email.trim().length < 6 || 
-           password.trim().length < 6 || 
-           confirmar.trim().length < 6 || 
-           password !== confirmar
-        )  {
-            setError(true)
+        if (!email || !password || !confirmar) {
+            alert('Todos los campos son obligatorios.');
+            return;
+        }
+        if (password.length <6) {
+            alert('La contraseña dene tener al menos 6 caracteres.');
+            return;
+        }
+        if (password !== confirmar) {
+            alert('La contraseña y la confirmación de la contraseña deben ser iguales.');
+            setPassword("");
+            setConfirmar("");
             return
-           }
-        setError(false);
+        }
+        setLoading(true);
+
+        try {
+            await register(email, password, confirmar);
+        }
+        catch (error) {
+            alert('Error al registrarse. Intenta nuevamente.');
+            console.error(error);
+        }
+        finally {
+            setLoading(false);
+        }
         setEmail('');
         setPassword('');
         setConfirmar('');
@@ -37,6 +61,7 @@ export default function Register() {
             <input
             type='text'
             name='email'
+            placeholder='Ingrese un Email'
             onChange={(e) => {setEmail(e.target.value)}}
             value={email}
             />
@@ -46,6 +71,7 @@ export default function Register() {
             <input
             type='password'
             name='password'
+            placeholder='Ingrese una contraseña'
             onChange={(e) => {setPassword(e.target.value)}}
             value={password}
             />
@@ -55,13 +81,12 @@ export default function Register() {
             <input
             type='password'
             name='confi-password'
+            placeholder='Confirme su contrseña'
             onChange={(e) => {setConfirmar(e.target.value)}}
             value={confirmar}
             />
         </div>
-        {error !== null && 
-        (error ? <p id="incorrecto">Complete todos los campos</p> : <p id="correcto">Datos ingresados de manera exitosa</p>)}
-        <button type='submit'>Enviar</button>
+        <button type='submit' disabled={loading}>{loading ? 'Cargando...' : 'Registrarse'}</button>
     </form>
     </div>
     </>

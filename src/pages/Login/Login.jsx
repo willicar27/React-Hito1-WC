@@ -1,33 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router";
+import { useUser } from "../../Context/UserContext"
 import './login.css'
 
 export default function Login() {
        const [email,setEmail] = useState('');
        const [password,setPassword] = useState('');
-       const [error,setError] = useState(null); 
+       const [loading,setLoading] = useState(false);
+       const [errorMessage, setErrorMessage] = useState('');
+       const [token, login] = useUser();
+
+       const navigate = useNavigate();
        
-       const validacion = (e) => {
-              e.preventDefault ()
-       
-              if(email.trim().length < 6 || password.trim().length < 6 )  
-              {
-                     setError(true);
-                     return
+       useEffect(() => {
+              if (token) {
+                     navigate("/");
               }
-              setError(false);
-              setEmail('');
-              setPassword('')
-       }
+       }, [token, navigate]);
+
+       const validacion = async (e) => {
+              e.preventDefault();
+              setErrorMessage('');
+
+              if (!email || !password) {
+                     setErrorMessage('Todos los campos deben ser rellenados');
+                     return;
+              }
+              if (password.length < 6) {
+                     setErrorMessage('La contraseña debe tener al menos 6 caracteres');
+                     return;
+              }
+
+              setLoading(true);
+              try {
+                     await login(email, password);
+              }
+              catch (error) {
+                     setErrorMessage('Error en inicio de sesión');
+                     console.error(error);
+              }
+              finally {
+                     setLoading(false);
+                     setEmail("");
+                     setPassword("")
+              }
+       };
 
        return <>
        <div id="conteiner">
        <form id="formulario" onSubmit={validacion}>
-              <h2>Login</h2>
+              <h2>Inicio de Sesión</h2>
+              {errorMessage && <p id='mensajeError'>{errorMessage}</p>}
               <div className='campos'>
               <label>Email</label>
               <input
-              type='text'
+              type='email'
               name='email'
+              placeholder='Ingrese Email'
               onChange={(e) => {setEmail(e.target.value)}}
               value={email}
               />
@@ -37,12 +66,12 @@ export default function Login() {
               <input
               type='password'
               name='password'
+              placeholder='Ingrese Password'
               onChange={(e) => {setPassword(e.target.value)}}
               value={password}
               />
               </div>
-              {error !== null && (error ? <p id="incorrecto">Complete todos los campos</p> : <p id="correcto">Datos ingresados de manera exitosa</p>)}
-              <button type='submit'>Enviar</button>
+              <button type='submit' disabled={loading}>{loading ? 'Cargando..' : 'Iniciar Sesión'}</button>
               </form>
        </div>
               </>
