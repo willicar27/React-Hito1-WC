@@ -8,7 +8,7 @@ export default function Login() {
        const [password,setPassword] = useState('');
        const [loading,setLoading] = useState(false);
        const [errorMessage, setErrorMessage] = useState('');
-       const [token, login] = useUser();
+       const {token, login} = useUser();
 
        const navigate = useNavigate();
        

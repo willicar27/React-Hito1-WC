@@ -12,9 +12,9 @@ export default function Profile() {
     >
     <h2 id='titulo-porfile'>Usuario:</h2>
     <p>Email: <strong>{email}</strong></p>
-    <link to="/">
+    <Link to="/">
     <button onClick={logout}>Cerrar Sesión</button>
-    </link>
+    </Link>
     </div>
     </>
   )

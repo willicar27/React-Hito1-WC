@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Cart() {
 
-    const {cart, handleIncrease, handleDecrease, total,  HandleAgregarCarrito} = useContext(ContextCart);
+    const {cart, handleIncrease, handleDecrease, total,  clearCart} = useContext(ContextCart);
     const {token} = useUser();
 
     const handlePayment = async () => {
@@ -62,7 +62,7 @@ export default function Cart() {
     <div className='total'>
         <h2>Total:<span>${total.toFixed(0)}</span></h2>
         <button disabled={!token || cart.length === 0} onClick={handlePayment}>Pagar</button>
-        <link to="/">seguir comprando</link>
+        <Link to="/">seguir comprando</Link>
     </div>
     </div>
     </>

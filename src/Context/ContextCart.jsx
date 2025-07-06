@@ -9,13 +9,16 @@ const [cart, setCart] = useState(
 );
 
 const nuevaPizzaCount = (id, increment = true) => {
-    setCart((prevCart) =>
-        prevCart.map((pizza) => 
+    const updatedCart = cart
+        .map((pizza) => 
             pizza.id === id
-                ? {...pizza, count: Number(pizza.count || 0) + (increment ? 1 : -1),    
+                ? {...pizza, 
+                    count: Number(pizza.count || 0) + (increment ? 1 : -1),    
                 }
                 : pizza)
-                ).filter((pizza) => (pizza.count || 0) > 0);
+                .filter((pizza) => (pizza.count || 0) > 0);
+
+                setCart(updatedCart);
 };
 
 const handleIncrease = (id) => nuevaPizzaCount(id, true);
@@ -39,6 +42,10 @@ const HandleAgregarCarrito = (pizza) => {
     });
 };
 
+const clearCart = () => {
+    setCart([])
+};
+
 const total = cart.reduce((acc, pizza) => {
     const price = Number(pizza.price) || 0;
     const count = Number(pizza.count) || 0;
@@ -51,6 +58,7 @@ const contextValue = {
     handleDecrease,
     HandleAgregarCarrito,
     total,
+    clearCart
 };
 console.log(cart);
 

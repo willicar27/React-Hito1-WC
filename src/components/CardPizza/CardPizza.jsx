@@ -1,10 +1,19 @@
 import React, { useContext } from 'react';
 import './CardPizza.css';
 import {ContextCart} from '../../Context/ContextCart';
-
+import { useNavigate  } from 'react-router-dom';
 export default function CardPizza({img, name, ingredients, price, id})  {
   
   const {HandleAgregarCarrito} = useContext(ContextCart);
+  const navigate = useNavigate();
+  const createCart = (pizzaId, pizzaName, pizzaImg, pizzaPrice) => {
+    const newElementCart = {pizzaId, pizzaName, pizzaImg, pizzaPrice, quantity: 1, };
+    HandleAgregarCarrito(newElementCart);
+  }
+
+  const VerPizza =() => {
+    navigate(`/pizza/${id}`);
+  };
 
   return (
     <div id="card-product">
@@ -19,8 +28,8 @@ export default function CardPizza({img, name, ingredients, price, id})  {
         </div>
         <span>Precio: $ {price}</span>
         <div id="card-button">
-          <button>Ver Mas👀</button>
-          <button id="añadir" onClick={() => HandleAgregarCarrito({img, name, price, id})}>Añadir🛒</button>
+          <button onClick={VerPizza}>Ver Mas👀</button>
+          <button id="añadir" onClick={() => createCart({id, img, name, price,})}>Añadir🛒</button>
         </div>
     </div>
   )

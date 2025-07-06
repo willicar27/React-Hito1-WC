@@ -1,6 +1,7 @@
 import React, {createContext, useState, useContext } from "react";
 
 export const UserContext = createContext();
+export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({children}) => {
 
@@ -20,7 +21,7 @@ export const UserProvider = ({children}) => {
             })
 
             if (!response.ok) {
-                const errorText = await respose.text()
+                const errorText = await response.text()
                 throw new Error(errorText || 'Error en la autenticación')
             }
 
@@ -42,7 +43,7 @@ export const UserProvider = ({children}) => {
             const response = await fetch('http://localhost:5000/api/auth/register', {
                 method: 'POST',
                 headers: {
-                    'Constent-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({email, password})
             });
@@ -58,8 +59,8 @@ export const UserProvider = ({children}) => {
             alert("Registro Exitoso")
         }  
         catch (error) {
-            console.error('Error en el registro: ', error.menssage)
-            alert('Error en registro: ' + error.menssage)
+            console.error('Error en el registro: ', error.message)
+            alert('Error en registro: ' + error.message)
         }
         }
 
